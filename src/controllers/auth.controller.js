@@ -2,18 +2,19 @@ import { pool } from "../db.js";
 import bcrypt from 'bcrypt'
 import { sendStatus } from "../libs/requestHandler.js";
 import { createAccessToken } from "../libs/jwt.js";
+
 import md5 from "md5";
 export const signIng = async (req, res) => {
     const { email, password } = req.body
     const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
-    if (result.rowCount === 0) return sendStatus(res, 404, "Usuario no existente")
+    if (result.rowCount === 0) return sendStatus(res, 409, "Usuario no existente")
     const validPassword = await bcrypt.compare(password, result.rows[0].password)
     console.log(result.rows[0]);
-    if (!validPassword) return sendStatus(res, 404, "Usuario no existente")
+    if (!validPassword) return sendStatus(res, 409, "Usuario no existente")
     const token = await createAccessToken({ id: result.rows[0].id })
     res.cookie("token", token, {
         // httpOnly: true,
-        //secure: true,
+        secure: true,
         sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
@@ -28,7 +29,7 @@ export const signUp = async (req, res) => {
     const token = await createAccessToken({ id: result.rows[0].id })
     res.cookie("token", token, {
         // httpOnly: true,
-        //secure: true,
+        secure: true,
         sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, // 1 day
     });

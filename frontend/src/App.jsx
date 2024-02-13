@@ -7,6 +7,8 @@ import RegisterPage from "./pages/RegisterPage";
 import TasksPage from "./pages/TasksPage";
 import TaskFormPage from "./pages/TaskFormPage";
 import ProfilePage from "./pages/ProfilePage";
+import NotFound from "./pages/NotFound";
+
 const App = () => {
   return (
     <Routes>
@@ -18,6 +20,7 @@ const App = () => {
       <Route path="/task/new" element={<TaskFormPage />} />
       <Route path="/task/1/edit" element={<TaskFormPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
 };

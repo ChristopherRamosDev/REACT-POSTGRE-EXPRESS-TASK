@@ -16,13 +16,14 @@ export const getTask = async (req, res) => {
 }
 export const createTask = async (req, res, next) => {
     try {
+        console.log('aca');
         const { title, description } = req.body;
         const result = await createTaskModel(title, description, req._sesion)
         return res.json(result)
     } catch (error) {
-        if (error.code === '23505') {
+       /*  if (error.code === '23505') {
             return sendStatus(res, 409, 'Tarea ya creada')
-        }
+        } */
         next(error)
     }
 }

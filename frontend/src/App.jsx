@@ -9,19 +9,25 @@ import TaskFormPage from "./pages/TaskFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 
+import Navbar from "./pages/components/navbar/Navbar";
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/tasks" element={<TasksPage />} />
-      <Route path="/task/new" element={<TaskFormPage />} />
-      <Route path="/task/1/edit" element={<TaskFormPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="*" element={<NotFound />}></Route>
-    </Routes>
+    <>
+      <Navbar></Navbar>
+      <div className="px-20 mx-auto">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/task/new" element={<TaskFormPage />} />
+          <Route path="/task/1/edit" element={<TaskFormPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
+    </>
   );
 };
 
